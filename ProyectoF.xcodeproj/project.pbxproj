@@ -253,15 +253,18 @@
 					39D7DF761BFC12F2005DB5D3 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = H89LF25P69;
+						LastSwiftMigration = 0830;
 					};
 					39D7DF8E1BFC12F3005DB5D3 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 83W5MAX744;
+						DevelopmentTeam = H89LF25P69;
+						LastSwiftMigration = 0830;
 						TestTargetID = 39D7DF761BFC12F2005DB5D3;
 					};
 					39D7DF991BFC12F3005DB5D3 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 83W5MAX744;
+						LastSwiftMigration = 0830;
 						TestTargetID = 39D7DF761BFC12F2005DB5D3;
 					};
 				};
@@ -482,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ProyectoF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -496,6 +500,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ProyectoF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -505,11 +510,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H89LF25P69;
 				INFOPLIST_FILE = ProyectoFTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoFTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProyectoF.app/ProyectoF";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hexa F.M.app/Hexa F.M";
 			};
 			name = Debug;
 		};
@@ -517,11 +524,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H89LF25P69;
 				INFOPLIST_FILE = ProyectoFTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoFTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProyectoF.app/ProyectoF";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hexa F.M.app/Hexa F.M";
 			};
 			name = Release;
 		};
@@ -533,6 +542,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoFUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ProyectoF;
 				USES_XCTRUNNER = YES;
 			};
@@ -545,6 +555,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoFUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ProyectoF;
 				USES_XCTRUNNER = YES;
 			};

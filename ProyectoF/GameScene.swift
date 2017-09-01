@@ -54,11 +54,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var Score = Int()
     var ScoreLabel = UILabel()
     
-    var HighscoreDefault = NSUserDefaults.standardUserDefaults()
+    var HighscoreDefault = UserDefaults.standard
     var Highscore = Int()
     var HighscoreLabel = UILabel()
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         let backgroundMusic = SKAudioNode(fileNamed: "music.mp3")
         backgroundMusic.autoplayLooped = true
@@ -67,8 +67,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        if (HighscoreDefault.valueForKey("Highscore") != nil){
-            Highscore = HighscoreDefault.valueForKey("Highscore") as! NSInteger!
+        if (HighscoreDefault.value(forKey: "Highscore") != nil){
+            Highscore = HighscoreDefault.value(forKey: "Highscore") as! NSInteger!
             HighscoreLabel.text = "Highscore:  \(Highscore)"
             
         }
@@ -84,20 +84,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ScoreLabel.text = " \(Score)"
         ScoreLabel = UILabel(frame: CGRect(x: 120, y: 90, width: 125, height: 20))
-        ScoreLabel.textColor = UIColor.blackColor()
+        ScoreLabel.textColor = UIColor.black
         self.view?.addSubview(ScoreLabel)
         
         
-        self.physicsWorld.gravity = CGVectorMake(0, -4)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -4)
         
         //self.scene?.backgroundColor = UIColor.darkGrayColor()
-        let sceneBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        let sceneBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         sceneBody.friction = 0
         self.physicsBody = sceneBody
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = SKColor.white
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         let FirstBody: SKPhysicsBody = contact.bodyA
         let SecondBody: SKPhysicsBody = contact.bodyB
         
@@ -133,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             baseC.removeFromParent()
             ScoreLabel.removeFromSuperview()
             
-            self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fadeWithDuration(0.1))
+            self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fade(withDuration: 0.1))
         }
         
     }
@@ -155,9 +155,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.contactTestBitMask = Physics.baseO
         ball.position = CGPoint(x:self.frame.width / 2, y: self.frame.height / 2)
         ball.size = CGSize(width: 15, height: 15)
-        let color = SKAction.colorizeWithColor(UIColor.blueColor(), colorBlendFactor: 1, duration: 0.01)
+        let color = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 1, duration: 0.01)
         self.addChild(ball)
-        ball.runAction(color)
+        ball.run(color)
 
     }
     
@@ -167,9 +167,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func BaseA(){
         baseA = SKSpriteNode(imageNamed: "base")
         baseA.position = CGPoint(x: self.frame.width / 2 + 1.5, y: self.frame.height / 2 - 97)
-        baseA.physicsBody = SKPhysicsBody(rectangleOfSize: baseA.size)
+        baseA.physicsBody = SKPhysicsBody(rectangleOf: baseA.size)
         baseA.physicsBody?.affectedByGravity = false
-        baseA.physicsBody?.dynamic = false
+        baseA.physicsBody?.isDynamic = false
         baseA.physicsBody?.categoryBitMask = Physics.baseA
         baseA.physicsBody?.contactTestBitMask = Physics.ballA
         baseA.physicsBody?.contactTestBitMask = Physics.ballG
@@ -183,9 +183,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func BaseG(){
         baseG = SKSpriteNode(imageNamed: "baseG")
         baseG.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 - 49)
-        baseG.physicsBody = SKPhysicsBody(rectangleOfSize: baseG.size)
+        baseG.physicsBody = SKPhysicsBody(rectangleOf: baseG.size)
         baseG.physicsBody?.affectedByGravity = false
-        baseG.physicsBody?.dynamic = false
+        baseG.physicsBody?.isDynamic = false
         baseG.physicsBody?.categoryBitMask = Physics.baseG
         baseG.physicsBody?.contactTestBitMask = Physics.ballA
         baseG.physicsBody?.contactTestBitMask = Physics.ballG
@@ -193,17 +193,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseG.physicsBody?.contactTestBitMask = Physics.ballR
         baseG.physicsBody?.contactTestBitMask = Physics.ballY
         baseG.physicsBody?.contactTestBitMask = Physics.ballO
-        let rotate = SKAction.rotateByAngle(1.047197551, duration: 0.01)
-        baseG.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 1.047197551, duration: 0.01)
+        baseG.run(rotate)
         baseG.size = CGSize(width: 119, height: 14)
         self.addChild(baseG)
     }
     func BaseC(){
         baseC = SKSpriteNode(imageNamed: "baseC")
         baseC.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 + 49)
-        baseC.physicsBody = SKPhysicsBody(rectangleOfSize: baseC.size)
+        baseC.physicsBody = SKPhysicsBody(rectangleOf: baseC.size)
         baseC.physicsBody?.affectedByGravity = false
-        baseC.physicsBody?.dynamic = false
+        baseC.physicsBody?.isDynamic = false
         baseC.physicsBody?.categoryBitMask = Physics.baseC
         baseC.physicsBody?.contactTestBitMask = Physics.ballA
         baseC.physicsBody?.contactTestBitMask = Physics.ballG
@@ -211,8 +211,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseC.physicsBody?.contactTestBitMask = Physics.ballR
         baseC.physicsBody?.contactTestBitMask = Physics.ballY
         baseC.physicsBody?.contactTestBitMask = Physics.ballO
-        let rotate = SKAction.rotateByAngle(2.094395102, duration: 0.01)
-        baseC.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 2.094395102, duration: 0.01)
+        baseC.run(rotate)
         baseC.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseC)
@@ -220,9 +220,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func BaseR(){
         baseR = SKSpriteNode(imageNamed: "baseR")
         baseR.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2 + 97)
-        baseR.physicsBody = SKPhysicsBody(rectangleOfSize: baseR.size)
+        baseR.physicsBody = SKPhysicsBody(rectangleOf: baseR.size)
         baseR.physicsBody?.affectedByGravity = false
-        baseR.physicsBody?.dynamic = false
+        baseR.physicsBody?.isDynamic = false
         baseR.physicsBody?.categoryBitMask = Physics.baseR
         baseR.physicsBody?.contactTestBitMask = Physics.ballA
         baseR.physicsBody?.contactTestBitMask = Physics.ballG
@@ -231,16 +231,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseR.physicsBody?.contactTestBitMask = Physics.ballY
         baseR.physicsBody?.contactTestBitMask = Physics.ballO
         baseR.size = CGSize(width: 119, height: 14)
-        let rotate = SKAction.rotateByAngle(3.1415926254, duration: 0.01)
-        baseR.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 3.1415926254, duration: 0.01)
+        baseR.run(rotate)
         self.addChild(baseR)
     }
     func BaseY(){
         baseY = SKSpriteNode(imageNamed: "baseA")
         baseY.position = CGPoint(x: self.frame.width / 2 - 85, y: self.frame.height / 2 + 49)
-        baseY.physicsBody = SKPhysicsBody(rectangleOfSize: baseY.size)
+        baseY.physicsBody = SKPhysicsBody(rectangleOf: baseY.size)
         baseY.physicsBody?.affectedByGravity = false
-        baseY.physicsBody?.dynamic = false
+        baseY.physicsBody?.isDynamic = false
         baseY.physicsBody?.categoryBitMask = Physics.baseY
         baseY.physicsBody?.contactTestBitMask = Physics.ballA
         baseY.physicsBody?.contactTestBitMask = Physics.ballG
@@ -248,10 +248,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseY.physicsBody?.contactTestBitMask = Physics.ballR
         baseY.physicsBody?.contactTestBitMask = Physics.ballY
         baseY.physicsBody?.contactTestBitMask = Physics.ballO
-        let rotate = SKAction.rotateByAngle(4.188790205, duration: 0.01)
-        let color = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 1, duration: 0.01)
-        baseY.runAction(rotate)
-        baseY.runAction(color)
+        let rotate = SKAction.rotate(byAngle: 4.188790205, duration: 0.01)
+        let color = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 0.01)
+        baseY.run(rotate)
+        baseY.run(color)
         baseY.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseY)
@@ -259,9 +259,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func BaseO(){
         baseO = SKSpriteNode(imageNamed: "baseN")
         baseO.position = CGPoint(x: self.frame.width / 2 - 85, y: self.frame.height / 2 - 49)
-        baseO.physicsBody = SKPhysicsBody(rectangleOfSize: baseO.size)
+        baseO.physicsBody = SKPhysicsBody(rectangleOf: baseO.size)
         baseO.physicsBody?.affectedByGravity = false
-        baseO.physicsBody?.dynamic = false
+        baseO.physicsBody?.isDynamic = false
         baseO.physicsBody?.categoryBitMask = Physics.baseO
         baseO.physicsBody?.contactTestBitMask = Physics.ballA
         baseO.physicsBody?.contactTestBitMask = Physics.ballG
@@ -269,8 +269,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseO.physicsBody?.contactTestBitMask = Physics.ballR
         baseO.physicsBody?.contactTestBitMask = Physics.ballY
         baseO.physicsBody?.contactTestBitMask = Physics.ballO
-        let rotate = SKAction.rotateByAngle(5.235987756, duration: 0.01)
-        baseO.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 5.235987756, duration: 0.01)
+        baseO.run(rotate)
         baseO.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseO)
@@ -286,37 +286,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch (aleatorio) {
         case 0:
-            let color = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballY
             break
         case 1:
-            let color = SKAction.colorizeWithColor(UIColor.blueColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballA
             break
             
         case 2:
-            let color = SKAction.colorizeWithColor(UIColor.brownColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.brown, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballC
             break
             
         case 3:
-            let color = SKAction.colorizeWithColor(UIColor.lightGrayColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.lightGray, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballG
             break
             
         case 4:
-            let color = SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballR
             break
             
         case 5:
-            let color = SKAction.colorizeWithColor(UIColor.orangeColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.orange, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics.ballO
             break
         default: NSLog("mal")
@@ -326,10 +326,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
         
-        ++contador
+        contador += 1
         if contador > 6{
             contador = 1
         }
@@ -338,7 +338,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 
-    func Cases(contador: Int){
+    func Cases(_ contador: Int){
         switch(contador){
         case 1: move1()
             break
@@ -366,34 +366,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 11, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.1)
-        
-        
-        baseA.runAction(follow1)
-        baseA.runAction(rotate1)
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.1)
         
         
-        baseG.runAction(follow2)
-        baseG.runAction(rotate1)
+        baseA.run(follow1)
+        baseA.run(rotate1)
         
-        baseC.runAction(follow3)
-        baseC.runAction(rotate1)
         
-        baseR.runAction(follow4)
-        baseR.runAction(rotate1)
+        baseG.run(follow2)
+        baseG.run(rotate1)
         
-        baseY.runAction(follow5)
-        baseY.runAction(rotate1)
+        baseC.run(follow3)
+        baseC.run(rotate1)
         
-        baseO.runAction(follow6)
-        baseO.runAction(rotate1)
+        baseR.run(follow4)
+        baseR.run(rotate1)
+        
+        baseY.run(follow5)
+        baseY.run(rotate1)
+        
+        baseO.run(follow6)
+        baseO.run(rotate1)
         
     }
     
@@ -406,35 +406,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 11, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.1)
-        
-        
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.1)
         
         
-        baseA.runAction(follow2)
-        baseA.runAction(rotate1)
         
-        baseG.runAction(follow3)
-        baseG.runAction(rotate1)
         
-        baseC.runAction(follow4)
-        baseC.runAction(rotate1)
+        baseA.run(follow2)
+        baseA.run(rotate1)
         
-        baseR.runAction(follow5)
-        baseR.runAction(rotate1)
+        baseG.run(follow3)
+        baseG.run(rotate1)
         
-        baseY.runAction(follow6)
-        baseY.runAction(rotate1)
+        baseC.run(follow4)
+        baseC.run(rotate1)
         
-        baseO.runAction(follow1)
-        baseO.runAction(rotate1)
+        baseR.run(follow5)
+        baseR.run(rotate1)
+        
+        baseY.run(follow6)
+        baseY.run(rotate1)
+        
+        baseO.run(follow1)
+        baseO.run(rotate1)
         
     }
     
@@ -447,34 +447,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 11, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.1)
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.1)
         
        
         
-        baseA.runAction(follow3)
-        baseA.runAction(rotate1)
+        baseA.run(follow3)
+        baseA.run(rotate1)
         
-        baseG.runAction(follow4)
-        baseG.runAction(rotate1)
+        baseG.run(follow4)
+        baseG.run(rotate1)
         
-        baseC.runAction(follow5)
-        baseC.runAction(rotate1)
+        baseC.run(follow5)
+        baseC.run(rotate1)
         
-        baseR.runAction(follow6)
-        baseR.runAction(rotate1)
+        baseR.run(follow6)
+        baseR.run(rotate1)
         
-        baseY.runAction(follow1)
-        baseY.runAction(rotate1)
+        baseY.run(follow1)
+        baseY.run(rotate1)
         
-        baseO.runAction(follow2)
-        baseO.runAction(rotate1)
+        baseO.run(follow2)
+        baseO.run(rotate1)
         
     }
     
@@ -487,33 +487,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 11, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.1)
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.1)
         
         
-        baseA.runAction(follow4)
-        baseA.runAction(rotate1)
+        baseA.run(follow4)
+        baseA.run(rotate1)
         
-        baseG.runAction(follow5)
-        baseG.runAction(rotate1)
+        baseG.run(follow5)
+        baseG.run(rotate1)
         
-        baseC.runAction(follow6)
-        baseC.runAction(rotate1)
+        baseC.run(follow6)
+        baseC.run(rotate1)
         
-        baseR.runAction(follow1)
-        baseR.runAction(rotate1)
+        baseR.run(follow1)
+        baseR.run(rotate1)
         
-        baseY.runAction(follow2)
-        baseY.runAction(rotate1)
+        baseY.run(follow2)
+        baseY.run(rotate1)
         
-        baseO.runAction(follow3)
-        baseO.runAction(rotate1)
+        baseO.run(follow3)
+        baseO.run(rotate1)
         
     }
     
@@ -527,34 +527,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 10.99, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.1)
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.1)
         
         
         
-        baseA.runAction(follow5)
-        baseA.runAction(rotate1)
+        baseA.run(follow5)
+        baseA.run(rotate1)
         
-        baseG.runAction(follow6)
-        baseG.runAction(rotate1)
+        baseG.run(follow6)
+        baseG.run(rotate1)
         
-        baseC.runAction(follow1)
-        baseC.runAction(rotate1)
+        baseC.run(follow1)
+        baseC.run(rotate1)
         
-        baseR.runAction(follow2)
-        baseR.runAction(rotate1)
+        baseR.run(follow2)
+        baseR.run(rotate1)
         
-        baseY.runAction(follow3)
-        baseY.runAction(rotate1)
+        baseY.run(follow3)
+        baseY.run(rotate1)
         
-        baseO.runAction(follow4)
-        baseO.runAction(rotate1)
+        baseO.run(follow4)
+        baseO.run(rotate1)
         
     }
     
@@ -567,37 +567,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Path5 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 8.922, endAngle: 9.955, clockwise: true)
         Path6 = UIBezierPath(arcCenter: CGPoint(x: self.frame.width/2, y:self.frame.height/2), radius:98, startAngle: 9.969, endAngle: 10.99, clockwise: true)
         
-        let follow1 = SKAction.followPath(Path.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow2 = SKAction.followPath(Path2.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow3 = SKAction.followPath(Path3.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow4 = SKAction.followPath(Path4.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow5 = SKAction.followPath(Path5.CGPath, asOffset: false, orientToPath: false, speed: 2000)
-        let follow6 = SKAction.followPath(Path6.CGPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow1 = SKAction.follow(Path.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow2 = SKAction.follow(Path2.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow3 = SKAction.follow(Path3.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow4 = SKAction.follow(Path4.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow5 = SKAction.follow(Path5.cgPath, asOffset: false, orientToPath: false, speed: 2000)
+        let follow6 = SKAction.follow(Path6.cgPath, asOffset: false, orientToPath: false, speed: 2000)
         
-        let rotate1 = SKAction.rotateByAngle(1.047197551, duration: 0.08)
+        let rotate1 = SKAction.rotate(byAngle: 1.047197551, duration: 0.08)
         
         
-        baseA.runAction(follow6)
-        baseA.runAction(rotate1)
+        baseA.run(follow6)
+        baseA.run(rotate1)
         
-        baseG.runAction(follow1)
-        baseG.runAction(rotate1)
+        baseG.run(follow1)
+        baseG.run(rotate1)
         
-        baseC.runAction(follow2)
-        baseC.runAction(rotate1)
+        baseC.run(follow2)
+        baseC.run(rotate1)
         
-        baseR.runAction(follow3)
-        baseR.runAction(rotate1)
+        baseR.run(follow3)
+        baseR.run(rotate1)
         
-        baseY.runAction(follow4)
-        baseY.runAction(rotate1)
+        baseY.run(follow4)
+        baseY.run(rotate1)
         
-        baseO.runAction(follow5)
-        baseO.runAction(rotate1)
+        baseO.run(follow5)
+        baseO.run(rotate1)
         
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     

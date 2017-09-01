@@ -13,8 +13,8 @@ class EndScene: SKScene {
     
     var HighscoreLabel = UILabel()
     var HighscoreLabel2 = UILabel()
-    var Score = NSUserDefaults.standardUserDefaults()
-    var Score2 = NSUserDefaults.standardUserDefaults()
+    var Score = UserDefaults.standard
+    var Score2 = UserDefaults.standard
     var highscore2 = Int()
     var highscore = Int()
     var restart: SKSpriteNode!
@@ -25,32 +25,32 @@ class EndScene: SKScene {
     var mode2: SKSpriteNode!
     
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
 
         
-        scene?.backgroundColor = UIColor.whiteColor()
+        scene?.backgroundColor = UIColor.white
         
         Mode1()
         Mode2()
         
-        if (Score.valueForKey("Highscore") != nil){
-            highscore = Score.valueForKey("Highscore") as! NSInteger!
+        if (Score.value(forKey: "Highscore") != nil){
+            highscore = Score.value(forKey: "Highscore") as! NSInteger!
             HighscoreLabel.text = "Highscore:  \(highscore)"
             
         }
         
-        if(Score2.valueForKey("Highscore2") != nil){
-            highscore2 = Score2.valueForKey("Highscore2") as! NSInteger!
+        if(Score2.value(forKey: "Highscore2") != nil){
+            highscore2 = Score2.value(forKey: "Highscore2") as! NSInteger!
             
         }
 
         
         HighscoreLabel = UILabel(frame: CGRect(x: 105, y: 95, width: 150, height: 20))
-        HighscoreLabel.textColor = UIColor.blackColor()
+        HighscoreLabel.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel)
         
         HighscoreLabel2 = UILabel(frame: CGRect(x: 105, y: 185, width: 150, height: 20))
-        HighscoreLabel2.textColor = UIColor.blackColor()
+        HighscoreLabel2.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel2)
         HighscoreLabel2.text = "Highscore:  \(highscore2)"
         
@@ -82,9 +82,9 @@ class EndScene: SKScene {
         self.addChild(restart)
         RestartB = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 50, width: 190, height: 40))
         RestartB.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 50)
-        RestartB.setTitle("", forState: UIControlState.Normal)
-        RestartB.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        RestartB.addTarget(self, action: Selector("Move"), forControlEvents: UIControlEvents.TouchUpInside)
+        RestartB.setTitle("", for: UIControlState())
+        RestartB.setTitleColor(UIColor.darkGray, for: UIControlState())
+        RestartB.addTarget(self, action: #selector(EndScene.Move), for: UIControlEvents.touchUpInside)
         self.view?.addSubview(RestartB)
         
         
@@ -95,13 +95,13 @@ class EndScene: SKScene {
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
         if  Physics.modo==1{
-        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fadeWithDuration(0.1))
+        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
             //NSLog("\(Physics.modo)")
             RestartB.removeFromSuperview()
             RestartB2.removeFromSuperview()
         }
         else {
-            self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fadeWithDuration(0.1))
+            self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
             RestartB.removeFromSuperview()
             RestartB2.removeFromSuperview()
         }
@@ -117,9 +117,9 @@ class EndScene: SKScene {
         self.addChild(menu)
         RestartB2 = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 150, width: 190, height: 40))
         RestartB2.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 150)
-        RestartB2.setTitle("", forState: UIControlState.Normal)
-        RestartB2.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        RestartB2.addTarget(self, action: Selector("MoveM"), forControlEvents: UIControlEvents.TouchUpInside)
+        RestartB2.setTitle("", for: UIControlState())
+        RestartB2.setTitleColor(UIColor.darkGray, for: UIControlState())
+        RestartB2.addTarget(self, action: #selector(EndScene.MoveM), for: UIControlEvents.touchUpInside)
         self.view?.addSubview(RestartB2)
         
         
@@ -131,12 +131,12 @@ class EndScene: SKScene {
         HighscoreLabel2.removeFromSuperview()
          RestartB2.removeFromSuperview()
         RestartB.removeFromSuperview()
-        self.scene!.view?.presentScene(MenuScene(fileNamed: "MenuScene")!, transition: SKTransition.fadeWithDuration(0.1))
+        self.scene!.view?.presentScene(MenuScene(fileNamed: "MenuScene")!, transition: SKTransition.fade(withDuration: 0.1))
        
         
         
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         
     }

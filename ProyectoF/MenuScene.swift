@@ -32,7 +32,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     var RestartBtn : UIButton!
     var RestartBtn2: UIButton!
     var HighscoreLabel = UILabel()
-    var Score = NSUserDefaults.standardUserDefaults()
+    var Score = UserDefaults.standard
     var highscore = Int()
     var mode1: SKSpriteNode!
     var button1: UIButton!
@@ -44,30 +44,30 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     var baseO: SKSpriteNode!
     var baseC: SKSpriteNode!
     var ball: SKSpriteNode!
-    var Score2 = NSUserDefaults.standardUserDefaults()
+    var Score2 = UserDefaults.standard
     var highscore2 = Int()
     var HighscoreLabel2 = UILabel()
     var aleatorio: UInt32 = 1;
     var revisar: UInt32 = 1;
     var hexa: SKSpriteNode!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
         self.scene?.size = CGSize(width: 320, height: 568)
        // SKSceneScaleMode.AspectFill
         
 
-        scene?.backgroundColor = UIColor.whiteColor()
+        scene?.backgroundColor = UIColor.white
         Mode1()
         Mode2()
         
-        if (Score.valueForKey("Highscore") != nil){
-            highscore = Score.valueForKey("Highscore") as! NSInteger!
+        if (Score.value(forKey: "Highscore") != nil){
+            highscore = Score.value(forKey: "Highscore") as! NSInteger!
             HighscoreLabel.text = "Highscore:  \(highscore)"
             
         }
-        if (Score2.valueForKey("Highscore2") != nil){
-            highscore2 = Score2.valueForKey("Highscore2") as! NSInteger!
+        if (Score2.value(forKey: "Highscore2") != nil){
+            highscore2 = Score2.value(forKey: "Highscore2") as! NSInteger!
             HighscoreLabel2.text = "Highscore:  \(highscore2)"
             
         }
@@ -76,13 +76,13 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         
         HighscoreLabel = UILabel(frame: CGRect(x: 110, y: 330  , width: 125, height: 20))
         //  330
-        HighscoreLabel.textColor = UIColor.blackColor()
+        HighscoreLabel.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel)
         
         HighscoreLabel.text = "Highscore:  \(highscore)"
         
         HighscoreLabel2 = UILabel(frame: CGRect(x: 110, y: 310+120 , width: 125, height: 20))
-        HighscoreLabel2.textColor = UIColor.blackColor()
+        HighscoreLabel2.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel2)
         
         HighscoreLabel2.text = "Highscore:  \(highscore2)"
@@ -107,7 +107,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(hexa)
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         
             RandomColor()
     }
@@ -123,37 +123,37 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         
         switch (aleatorio) {
         case 0:
-            let color = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
 
             break
         case 1:
-            let color = SKAction.colorizeWithColor(UIColor.blueColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics1.ballA
             break
             
         case 2:
-            let color = SKAction.colorizeWithColor(UIColor.brownColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.brown, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics1.ballC
             break
             
         case 3:
-            let color = SKAction.colorizeWithColor(UIColor.lightGrayColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.lightGray, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics1.ballG
             break
             
         case 4:
-            let color = SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics1.ballR
             break
             
         case 5:
-            let color = SKAction.colorizeWithColor(UIColor.orangeColor(), colorBlendFactor: 1, duration: 0.01)
-            ball.runAction(color)
+            let color = SKAction.colorize(with: UIColor.orange, colorBlendFactor: 1, duration: 0.01)
+            ball.run(color)
             ball.physicsBody?.categoryBitMask = Physics1.ballO
             break
         default: NSLog("mal")
@@ -168,9 +168,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         
         RestartBtn = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 100, width: 170, height: 50))
         RestartBtn.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 100)
-        RestartBtn.setTitle("", forState: UIControlState.Normal)
-        RestartBtn.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        RestartBtn.addTarget(self, action: Selector("Restart"), forControlEvents: UIControlEvents.TouchUpInside)
+        RestartBtn.setTitle("", for: UIControlState())
+        RestartBtn.setTitleColor(UIColor.darkGray, for: UIControlState())
+        RestartBtn.addTarget(self, action: #selector(MenuScene.Restart), for: UIControlEvents.touchUpInside)
         self.view?.addSubview(RestartBtn)
         self.addChild(mode1)
 
@@ -184,16 +184,16 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(mode2)
         RestartBtn2 = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 200, width: 170, height: 50))
         RestartBtn2.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 200)
-        RestartBtn2.setTitle("", forState: UIControlState.Normal)
-        RestartBtn2.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        RestartBtn2.addTarget(self, action: Selector("Restart2"), forControlEvents: UIControlEvents.TouchUpInside)
+        RestartBtn2.setTitle("", for: UIControlState())
+        RestartBtn2.setTitleColor(UIColor.darkGray, for: UIControlState())
+        RestartBtn2.addTarget(self, action: #selector(MenuScene.Restart2), for: UIControlEvents.touchUpInside)
         self.view?.addSubview(RestartBtn2)
     }
     
     func Restart(){
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
-        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fadeWithDuration(0.1))
+        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
         ball.removeFromParent()
         baseA.removeFromParent()
         baseO.removeFromParent()
@@ -209,7 +209,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     func Restart2(){
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
-        self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fadeWithDuration(0.1))
+        self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
         ball.removeFromParent()
         baseA.removeFromParent()
         baseO.removeFromParent()
@@ -236,18 +236,18 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.contactTestBitMask = Physics1.baseO
         ball.position = CGPoint(x:self.frame.width / 2, y: self.frame.height / 2 + 120)
         ball.size = CGSize(width: 15, height: 15)
-        let color = SKAction.colorizeWithColor(UIColor.blueColor(), colorBlendFactor: 1, duration: 0.01)
+        let color = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 1, duration: 0.01)
         self.addChild(ball)
-        ball.runAction(color)
+        ball.run(color)
         
     }
     
     func BaseA(){
         baseA = SKSpriteNode(imageNamed: "base")
         baseA.position = CGPoint(x: self.frame.width / 2 + 1.5, y: self.frame.height / 2 + 50)
-        baseA.physicsBody = SKPhysicsBody(rectangleOfSize: baseA.size)
+        baseA.physicsBody = SKPhysicsBody(rectangleOf: baseA.size)
         baseA.physicsBody?.affectedByGravity = false
-        baseA.physicsBody?.dynamic = false
+        baseA.physicsBody?.isDynamic = false
         baseA.physicsBody?.categoryBitMask = Physics1.baseA
         baseA.physicsBody?.contactTestBitMask = Physics1.ballA
         baseA.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -261,9 +261,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     func BaseG(){
         baseG = SKSpriteNode(imageNamed: "baseG")
         baseG.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 + 98)
-        baseG.physicsBody = SKPhysicsBody(rectangleOfSize: baseG.size)
+        baseG.physicsBody = SKPhysicsBody(rectangleOf: baseG.size)
         baseG.physicsBody?.affectedByGravity = false
-        baseG.physicsBody?.dynamic = false
+        baseG.physicsBody?.isDynamic = false
         baseG.physicsBody?.categoryBitMask = Physics1.baseG
         baseG.physicsBody?.contactTestBitMask = Physics1.ballA
         baseG.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -271,17 +271,17 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         baseG.physicsBody?.contactTestBitMask = Physics1.ballR
         baseG.physicsBody?.contactTestBitMask = Physics1.ballY
         baseG.physicsBody?.contactTestBitMask = Physics1.ballO
-        let rotate = SKAction.rotateByAngle(1.047197551, duration: 0.01)
-        baseG.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 1.047197551, duration: 0.01)
+        baseG.run(rotate)
         baseG.size = CGSize(width: 119, height: 14)
         self.addChild(baseG)
     }
     func BaseC(){
         baseC = SKSpriteNode(imageNamed: "baseC")
         baseC.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 + 196)
-        baseC.physicsBody = SKPhysicsBody(rectangleOfSize: baseC.size)
+        baseC.physicsBody = SKPhysicsBody(rectangleOf: baseC.size)
         baseC.physicsBody?.affectedByGravity = false
-        baseC.physicsBody?.dynamic = false
+        baseC.physicsBody?.isDynamic = false
         baseC.physicsBody?.categoryBitMask = Physics1.baseC
         baseC.physicsBody?.contactTestBitMask = Physics1.ballA
         baseC.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -289,8 +289,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         baseC.physicsBody?.contactTestBitMask = Physics1.ballR
         baseC.physicsBody?.contactTestBitMask = Physics1.ballY
         baseC.physicsBody?.contactTestBitMask = Physics1.ballO
-        let rotate = SKAction.rotateByAngle(2.094395102, duration: 0.01)
-        baseC.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 2.094395102, duration: 0.01)
+        baseC.run(rotate)
         baseC.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseC)
@@ -298,9 +298,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     func BaseR(){
         baseR = SKSpriteNode(imageNamed: "baseR")
         baseR.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2 + 245)
-        baseR.physicsBody = SKPhysicsBody(rectangleOfSize: baseR.size)
+        baseR.physicsBody = SKPhysicsBody(rectangleOf: baseR.size)
         baseR.physicsBody?.affectedByGravity = false
-        baseR.physicsBody?.dynamic = false
+        baseR.physicsBody?.isDynamic = false
         baseR.physicsBody?.categoryBitMask = Physics1.baseR
         baseR.physicsBody?.contactTestBitMask = Physics1.ballA
         baseR.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -309,16 +309,16 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         baseR.physicsBody?.contactTestBitMask = Physics1.ballY
         baseR.physicsBody?.contactTestBitMask = Physics1.ballO
         baseR.size = CGSize(width: 119, height: 14)
-        let rotate = SKAction.rotateByAngle(3.1415926254, duration: 0.01)
-        baseR.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 3.1415926254, duration: 0.01)
+        baseR.run(rotate)
         self.addChild(baseR)
     }
     func BaseY(){
         baseY = SKSpriteNode(imageNamed: "baseA")
         baseY.position = CGPoint(x: self.frame.width / 2 - 85, y: self.frame.height / 2 + 196)
-        baseY.physicsBody = SKPhysicsBody(rectangleOfSize: baseY.size)
+        baseY.physicsBody = SKPhysicsBody(rectangleOf: baseY.size)
         baseY.physicsBody?.affectedByGravity = false
-        baseY.physicsBody?.dynamic = false
+        baseY.physicsBody?.isDynamic = false
         baseY.physicsBody?.categoryBitMask = Physics1.baseY
         baseY.physicsBody?.contactTestBitMask = Physics1.ballA
         baseY.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -326,10 +326,10 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         baseY.physicsBody?.contactTestBitMask = Physics1.ballR
         baseY.physicsBody?.contactTestBitMask = Physics1.ballY
         baseY.physicsBody?.contactTestBitMask = Physics1.ballO
-        let rotate = SKAction.rotateByAngle(4.188790205, duration: 0.01)
-        let color = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 1, duration: 0.01)
-        baseY.runAction(rotate)
-        baseY.runAction(color)
+        let rotate = SKAction.rotate(byAngle: 4.188790205, duration: 0.01)
+        let color = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 0.01)
+        baseY.run(rotate)
+        baseY.run(color)
         baseY.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseY)
@@ -337,9 +337,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     func BaseO(){
         baseO = SKSpriteNode(imageNamed: "baseN")
         baseO.position = CGPoint(x: self.frame.width / 2 - 85, y: self.frame.height / 2 + 98)
-        baseO.physicsBody = SKPhysicsBody(rectangleOfSize: baseO.size)
+        baseO.physicsBody = SKPhysicsBody(rectangleOf: baseO.size)
         baseO.physicsBody?.affectedByGravity = false
-        baseO.physicsBody?.dynamic = false
+        baseO.physicsBody?.isDynamic = false
         baseO.physicsBody?.categoryBitMask = Physics1.baseO
         baseO.physicsBody?.contactTestBitMask = Physics1.ballA
         baseO.physicsBody?.contactTestBitMask = Physics1.ballG
@@ -347,19 +347,19 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         baseO.physicsBody?.contactTestBitMask = Physics1.ballR
         baseO.physicsBody?.contactTestBitMask = Physics1.ballY
         baseO.physicsBody?.contactTestBitMask = Physics1.ballO
-        let rotate = SKAction.rotateByAngle(5.235987756, duration: 0.01)
-        baseO.runAction(rotate)
+        let rotate = SKAction.rotate(byAngle: 5.235987756, duration: 0.01)
+        baseO.run(rotate)
         baseO.size = CGSize(width: 119, height: 14)
         
         self.addChild(baseO)
     }
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         
         let touch : UITouch! = touches.first
-        let location = touch.locationInView(self.view)
+        let location = touch.location(in: self.view)
         
         //let x = location.x
 
