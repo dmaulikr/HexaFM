@@ -94,16 +94,13 @@ class EndScene: SKScene {
     func Move(){
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
+        RestartB.removeFromSuperview()
+        RestartB2.removeFromSuperview()
         if  Physics.modo==1{
         self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
-            //NSLog("\(Physics.modo)")
-            RestartB.removeFromSuperview()
-            RestartB2.removeFromSuperview()
-        }
+                    }
         else {
             self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
-            RestartB.removeFromSuperview()
-            RestartB2.removeFromSuperview()
         }
         
         
@@ -133,8 +130,6 @@ class EndScene: SKScene {
         RestartB.removeFromSuperview()
         self.scene!.view?.presentScene(MenuScene(fileNamed: "MenuScene")!, transition: SKTransition.fade(withDuration: 0.1))
        
-        
-        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
