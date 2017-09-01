@@ -252,6 +252,7 @@
 				TargetAttributes = {
 					39D7DF761BFC12F2005DB5D3 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = H89LF25P69;
 					};
 					39D7DF8E1BFC12F3005DB5D3 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -479,7 +480,7 @@
 				INFOPLIST_FILE = ProyectoF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoF;
+				PRODUCT_BUNDLE_IDENTIFIER = ProyectoF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -493,7 +494,7 @@
 				INFOPLIST_FILE = ProyectoF/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jass.ProyectoF;
+				PRODUCT_BUNDLE_IDENTIFIER = ProyectoF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

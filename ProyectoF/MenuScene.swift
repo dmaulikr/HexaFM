@@ -54,6 +54,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         self.scene?.size = CGSize(width: 320, height: 568)
+       // SKSceneScaleMode.AspectFill
         
 
         scene?.backgroundColor = UIColor.whiteColor()
@@ -73,13 +74,14 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
 
         
-        HighscoreLabel = UILabel(frame: CGRect(x: 110, y: 330 , width: 125, height: 20))
+        HighscoreLabel = UILabel(frame: CGRect(x: 110, y: 330  , width: 125, height: 20))
+        //  330
         HighscoreLabel.textColor = UIColor.blackColor()
         self.view?.addSubview(HighscoreLabel)
         
         HighscoreLabel.text = "Highscore:  \(highscore)"
         
-        HighscoreLabel2 = UILabel(frame: CGRect(x: 110, y: 434 , width: 125, height: 20))
+        HighscoreLabel2 = UILabel(frame: CGRect(x: 110, y: 310+120 , width: 125, height: 20))
         HighscoreLabel2.textColor = UIColor.blackColor()
         self.view?.addSubview(HighscoreLabel2)
         
