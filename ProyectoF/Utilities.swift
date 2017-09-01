@@ -19,4 +19,10 @@ class Utilities {
         }
     }
     
+    func deleteSubViews(view: SKView) {
+        for subview in view.subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
 }
