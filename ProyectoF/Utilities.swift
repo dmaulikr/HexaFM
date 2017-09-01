@@ -11,6 +11,8 @@ import SpriteKit
 
 class Utilities {
     
+    static let sharedInstance = Utilities()
+    
     func deleteChildren(node: SKNode) {
         for child in node.children {
             child.removeFromParent()
