@@ -12,17 +12,17 @@ struct Physics{
     
     static var modo = 1
     static let ballA: UInt32 = 1;
-    static let ballG: UInt32 = 7;
-    static let ballR: UInt32 = 3;
-    static let ballY: UInt32 = 4;
-    static let ballO: UInt32 = 5;
-    static let ballC: UInt32 = 6;
     static let baseA: UInt32 = 1;
-    static let baseG: UInt32 = 7;
+    static let ballR: UInt32 = 3;
     static let baseR: UInt32 = 3;
+    static let ballY: UInt32 = 4;
     static let baseY: UInt32 = 4;
+    static let ballO: UInt32 = 5;
     static let baseO: UInt32 = 5;
+    static let ballC: UInt32 = 6;
     static let baseC: UInt32 = 6;
+    static let ballG: UInt32 = 7;
+    static let baseG: UInt32 = 7;
     
 }
 
@@ -40,7 +40,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var contador = 0
     var balll = 1
 
-    
     var Path = UIBezierPath()
     var Path2 = UIBezierPath()
     var Path3 = UIBezierPath()
@@ -48,15 +47,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var Path5 = UIBezierPath()
     var Path6 = UIBezierPath()
     var aleatorio: UInt32 = 1;
-    var revisar: UInt32 = 1;
-
+    var lastNum: UInt32 = 1;
     
     var Score = Int()
     var ScoreLabel = UILabel()
-    
     var HighscoreDefault = UserDefaults.standard
     var Highscore = Int()
-    var HighscoreLabel = UILabel()
+    var HighscoreLabel = UILabel(frame: CGRect(x: 120, y: 120, width: 125, height: 20))
     
     override func didMove(to view: SKView) {
         /* Setup your scene here */
@@ -65,12 +62,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(backgroundMusic)
         physicsWorld.contactDelegate = self
         
-        
-        
         if (HighscoreDefault.value(forKey: "Highscore") != nil){
             Highscore = HighscoreDefault.value(forKey: "Highscore") as! NSInteger!
             HighscoreLabel.text = "Highscore:  \(Highscore)"
-            
+            self.view?.addSubview(HighscoreLabel)
         }
         
         BaseA()
@@ -81,16 +76,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         BaseC()
         BallA()
         
-        
         ScoreLabel.text = " \(Score)"
         ScoreLabel = UILabel(frame: CGRect(x: 120, y: 90, width: 125, height: 20))
         ScoreLabel.textColor = UIColor.black
         self.view?.addSubview(ScoreLabel)
         
-        
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -4)
         
-        //self.scene?.backgroundColor = UIColor.darkGrayColor()
         let sceneBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         sceneBody.friction = 0
         self.physicsBody = sceneBody
@@ -108,21 +100,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ScoreLabel.text = "Score:  \(Score)"
             HighscoreLabel.text = NSString(format: "Highscore:  %i", Highscore) as String
             
+        }
+        else{
             if (Score > Highscore)
             {
                 Highscore = Score
-                
-                
                 HighscoreDefault.setValue(Highscore, forKey: "Highscore")
-                HighscoreLabel.text = NSString(format: "Highscore:  %i", Highscore) as String
             }
-            
-            
-            HighscoreDefault.setValue(Highscore, forKey: "Highscore")
-        }
-        else{
-          //  var Score = NSUserDefaults.standardUserDefaults()
-           // Score.setValue(Score, forKey: "Score")
             
             ball.removeFromParent()
             baseA.removeFromParent()
@@ -132,13 +116,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             baseY.removeFromParent()
             baseC.removeFromParent()
             ScoreLabel.removeFromSuperview()
+            HighscoreLabel.removeFromSuperview()
             
             self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fade(withDuration: 0.1))
         }
         
     }
-    
-    
     
     func BallA(){
         ball = SKSpriteNode(imageNamed: "ball")
@@ -161,9 +144,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    
-    
-    
     func BaseA(){
         baseA = SKSpriteNode(imageNamed: "base")
         baseA.position = CGPoint(x: self.frame.width / 2 + 1.5, y: self.frame.height / 2 - 97)
@@ -180,6 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseA.size = CGSize(width: 123, height: 14)
         self.addChild(baseA)
     }
+    
     func BaseG(){
         baseG = SKSpriteNode(imageNamed: "baseG")
         baseG.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 - 49)
@@ -198,6 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         baseG.size = CGSize(width: 119, height: 14)
         self.addChild(baseG)
     }
+    
     func BaseC(){
         baseC = SKSpriteNode(imageNamed: "baseC")
         baseC.position = CGPoint(x: self.frame.width / 2 + 85, y: self.frame.height / 2 + 49)
@@ -280,9 +262,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         repeat{
             aleatorio = arc4random_uniform(6)
-        }while(aleatorio == revisar)
+        }while(aleatorio == lastNum)
         
-        revisar = aleatorio
+        lastNum = aleatorio
         
         switch (aleatorio) {
         case 0:
