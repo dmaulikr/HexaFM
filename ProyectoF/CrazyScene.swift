@@ -132,14 +132,8 @@ class CrazyScene: SKScene, SKPhysicsContactDelegate {
         else{
             //  var Score = NSUserDefaults.standardUserDefaults()
             // Score.setValue(Score, forKey: "Score")
-            
-            ball.removeFromParent()
-            baseA.removeFromParent()
-            baseO.removeFromParent()
-            baseR.removeFromParent()
-            baseG.removeFromParent()
-            baseY.removeFromParent()
-            baseC.removeFromParent()
+
+            Utilities.sharedInstance.deleteChildren(node: self)
             ScoreLabel.removeFromSuperview()
             
             self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fade(withDuration: 0.1))

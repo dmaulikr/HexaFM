@@ -31,6 +31,7 @@
 		39D7DF941BFC12F3005DB5D3 /* ProyectoFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D7DF931BFC12F3005DB5D3 /* ProyectoFTests.swift */; };
 		39D7DF9F1BFC12F3005DB5D3 /* ProyectoFUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D7DF9E1BFC12F3005DB5D3 /* ProyectoFUITests.swift */; };
 		AFC3D9821C03E7A800E12D2F /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC3D9811C03E7A800E12D2F /* ball.png */; };
+		AFF8B8701F59A25E000179D5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8B86F1F59A25E000179D5 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		39D7DF9E1BFC12F3005DB5D3 /* ProyectoFUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFUITests.swift; sourceTree = "<group>"; };
 		39D7DFA01BFC12F3005DB5D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC3D9811C03E7A800E12D2F /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
+		AFF8B86F1F59A25E000179D5 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				39D7DF851BFC12F3005DB5D3 /* Assets.xcassets */,
 				39D7DF871BFC12F3005DB5D3 /* LaunchScreen.storyboard */,
 				39D7DF8A1BFC12F3005DB5D3 /* Info.plist */,
+				AFF8B86F1F59A25E000179D5 /* Utilities.swift */,
 			);
 			path = ProyectoF;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			files = (
 				39D7DF7F1BFC12F2005DB5D3 /* GameScene.swift in Sources */,
 				39538F411C0CFE9300DF2434 /* CrazyScene.swift in Sources */,
+				AFF8B8701F59A25E000179D5 /* Utilities.swift in Sources */,
 				391BF2FF1C0B872E00B77931 /* MenuScene.swift in Sources */,
 				391BF3031C0BB05A00B77931 /* EndScene.swift in Sources */,
 				39D7DF811BFC12F2005DB5D3 /* GameViewController.swift in Sources */,

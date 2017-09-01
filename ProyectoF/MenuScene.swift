@@ -193,32 +193,19 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     func Restart(){
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
-        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
-        ball.removeFromParent()
-        baseA.removeFromParent()
-        baseO.removeFromParent()
-        baseR.removeFromParent()
-        baseG.removeFromParent()
-        baseY.removeFromParent()
-        baseC.removeFromParent()
         RestartBtn.removeFromSuperview()
         RestartBtn2.removeFromSuperview()
-
+        Utilities.sharedInstance.deleteChildren(node: self)
+        self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
     }
     
     func Restart2(){
         HighscoreLabel.removeFromSuperview()
         HighscoreLabel2.removeFromSuperview()
-        self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
-        ball.removeFromParent()
-        baseA.removeFromParent()
-        baseO.removeFromParent()
-        baseR.removeFromParent()
-        baseG.removeFromParent()
-        baseY.removeFromParent()
-        baseC.removeFromParent()
         RestartBtn.removeFromSuperview()
         RestartBtn2.removeFromSuperview()
+        Utilities.sharedInstance.deleteChildren(node: self)
+        self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
     }
     
     func BallA(){
@@ -354,15 +341,4 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(baseO)
     }
 
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
-        let touch : UITouch! = touches.first
-        let location = touch.location(in: self.view)
-        
-        //let x = location.x
-
-        
-    }
 }

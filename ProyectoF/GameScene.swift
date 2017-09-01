@@ -107,14 +107,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Highscore = Score
                 HighscoreDefault.setValue(Highscore, forKey: "Highscore")
             }
-            
-            ball.removeFromParent()
-            baseA.removeFromParent()
-            baseO.removeFromParent()
-            baseR.removeFromParent()
-            baseG.removeFromParent()
-            baseY.removeFromParent()
-            baseC.removeFromParent()
+
+            Utilities.sharedInstance.deleteChildren(node: self)
             ScoreLabel.removeFromSuperview()
             HighscoreLabel.removeFromSuperview()
             
