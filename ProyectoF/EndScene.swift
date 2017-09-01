@@ -92,10 +92,8 @@ class EndScene: SKScene {
     
     
     func Move(){
-        HighscoreLabel.removeFromSuperview()
-        HighscoreLabel2.removeFromSuperview()
-        RestartB.removeFromSuperview()
-        RestartB2.removeFromSuperview()
+        Utilities.sharedInstance.deleteSubViews(view: self.view!)
+        
         if  Physics.modo==1{
         self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
                     }
@@ -124,10 +122,9 @@ class EndScene: SKScene {
     
     
     func MoveM(){
-        HighscoreLabel.removeFromSuperview()
-        HighscoreLabel2.removeFromSuperview()
-         RestartB2.removeFromSuperview()
-        RestartB.removeFromSuperview()
+
+        Utilities.sharedInstance.deleteSubViews(view: self.view!)
+        
         self.scene!.view?.presentScene(MenuScene(fileNamed: "MenuScene")!, transition: SKTransition.fade(withDuration: 0.1))
        
     }

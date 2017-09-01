@@ -191,19 +191,13 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     }
     
     func Restart(){
-        HighscoreLabel.removeFromSuperview()
-        HighscoreLabel2.removeFromSuperview()
-        RestartBtn.removeFromSuperview()
-        RestartBtn2.removeFromSuperview()
+        Utilities.sharedInstance.deleteSubViews(view: self.view!)
         Utilities.sharedInstance.deleteChildren(node: self)
         self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
     }
     
     func Restart2(){
-        HighscoreLabel.removeFromSuperview()
-        HighscoreLabel2.removeFromSuperview()
-        RestartBtn.removeFromSuperview()
-        RestartBtn2.removeFromSuperview()
+        Utilities.sharedInstance.deleteSubViews(view: self.view!)
         Utilities.sharedInstance.deleteChildren(node: self)
         self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
     }

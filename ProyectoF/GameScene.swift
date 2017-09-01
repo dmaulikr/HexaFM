@@ -109,8 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
 
             Utilities.sharedInstance.deleteChildren(node: self)
-            ScoreLabel.removeFromSuperview()
-            HighscoreLabel.removeFromSuperview()
+            Utilities.sharedInstance.deleteSubViews(view: self.view!)
             
             self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fade(withDuration: 0.1))
         }

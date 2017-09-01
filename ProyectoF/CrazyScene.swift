@@ -134,8 +134,7 @@ class CrazyScene: SKScene, SKPhysicsContactDelegate {
             // Score.setValue(Score, forKey: "Score")
 
             Utilities.sharedInstance.deleteChildren(node: self)
-            ScoreLabel.removeFromSuperview()
-            
+            Utilities.sharedInstance.deleteSubViews(view: self.view!)
             self.scene!.view?.presentScene(EndScene(fileNamed: "EndScene")!, transition: SKTransition.fade(withDuration: 0.1))
         }
         
