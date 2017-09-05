@@ -165,13 +165,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         mode1 = SKSpriteNode(imageNamed: "mode1")
         mode1.position = CGPoint(x: self.frame.width / 2 , y: self.frame.height / 2 - 100)
         mode1.size = CGSize(width: 217.7, height: 62.3)
-        
-        RestartBtn = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 100, width: 170, height: 50))
-        RestartBtn.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 100)
-        RestartBtn.setTitle("", for: UIControlState())
-        RestartBtn.setTitleColor(UIColor.darkGray, for: UIControlState())
-        RestartBtn.addTarget(self, action: #selector(MenuScene.Restart), for: UIControlEvents.touchUpInside)
-        self.view?.addSubview(RestartBtn)
+        mode1.name = "mode1"
         self.addChild(mode1)
 
     }
@@ -181,22 +175,17 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         mode2 = SKSpriteNode(imageNamed: "mode2")
         mode2.position = CGPoint(x: self.frame.width / 2 , y: self.frame.height / 2 - 200)
         mode2.size = CGSize(width: 217.7, height: 62.3)
+        mode2.name = "mode2"
         self.addChild(mode2)
-        RestartBtn2 = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 200, width: 170, height: 50))
-        RestartBtn2.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 200)
-        RestartBtn2.setTitle("", for: UIControlState())
-        RestartBtn2.setTitleColor(UIColor.darkGray, for: UIControlState())
-        RestartBtn2.addTarget(self, action: #selector(MenuScene.Restart2), for: UIControlEvents.touchUpInside)
-        self.view?.addSubview(RestartBtn2)
     }
     
-    func Restart(){
+    func launchMode1(){
         Utilities.sharedInstance.deleteSubViews(view: self.view!)
         Utilities.sharedInstance.deleteChildren(node: self)
         self.scene!.view?.presentScene(GameScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.1))
     }
     
-    func Restart2(){
+    func launchMode2(){
         Utilities.sharedInstance.deleteSubViews(view: self.view!)
         Utilities.sharedInstance.deleteChildren(node: self)
         self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
@@ -334,5 +323,23 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         
         self.addChild(baseO)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.nodes(at: positionInScene)
+        
+        if let name = touchedNode.first?.name
+        {
+            if name == "mode1"
+            {
+                launchMode1()
+            }
+            else if name == "mode2"{
+                launchMode2()
+            }
+        }
+    }
+
 
 }
