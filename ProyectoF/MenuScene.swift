@@ -69,12 +69,13 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
             
         }
 
-        HighscoreLabel = UILabel(frame: CGRect(x: 110, y: 330  , width: 125, height: 20))
+        HighscoreLabel = UILabel(frame: CGRect(x: -self.frame.width / 2, y: self.frame.height / 2 - 100 , width: 125, height: 20))
+        NSLog("y hs label %d", HighscoreLabel.bounds.maxX)
         HighscoreLabel.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel)
         HighscoreLabel.text = "Highscore:  \(highscore)"
         
-        HighscoreLabel2 = UILabel(frame: CGRect(x: 110, y: 310+120 , width: 125, height: 20))
+        HighscoreLabel2 = UILabel(frame: CGRect(x: self.frame.width / 2 , y: self.frame.height / 2 - 200, width: 125, height: 20))
         HighscoreLabel2.textColor = UIColor.black
         self.view?.addSubview(HighscoreLabel2)
         HighscoreLabel2.text = "Highscore:  \(highscore2)"
@@ -158,6 +159,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         mode1.position = CGPoint(x: self.frame.width / 2 , y: self.frame.height / 2 - 100)
         mode1.size = CGSize(width: 217.7, height: 62.3)
         mode1.name = "mode1"
+       // NSLog("y mode1 label %d", mode1.bounds.maxX)
+
         self.addChild(mode1)
 
     }
