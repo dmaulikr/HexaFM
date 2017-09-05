@@ -24,9 +24,7 @@ class EndScene: SKScene {
     var mode1: SKSpriteNode!
     var mode2: SKSpriteNode!
     
-    
     override func didMove(to view: SKView) {
-
         
         scene?.backgroundColor = UIColor.white
         
@@ -43,7 +41,6 @@ class EndScene: SKScene {
             highscore2 = Score2.value(forKey: "Highscore2") as! NSInteger!
             
         }
-
         
         HighscoreLabel = UILabel(frame: CGRect(x: 105, y: 95, width: 150, height: 20))
         HighscoreLabel.textColor = UIColor.black
@@ -55,8 +52,8 @@ class EndScene: SKScene {
         HighscoreLabel2.text = "Highscore:  \(highscore2)"
         
         HighscoreLabel.text = "Highscore:  \(highscore)"
-        Restart()
-        Menu()
+        createRestartButton()
+        createMenuButton()
         
     }
     
@@ -74,24 +71,16 @@ class EndScene: SKScene {
         self.addChild(mode2)
     }
     
-    
-    func Restart(){
+    func createRestartButton(){
         restart = SKSpriteNode(imageNamed: "restart")
         restart.position = CGPoint(x: self.frame.width / 2 , y: self.frame.height / 2 - 50)
         restart.size = CGSize(width: 217.7, height: 62.3)
+        restart.name = "restart"
         self.addChild(restart)
-        RestartB = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 50, width: 190, height: 40))
-        RestartB.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 50)
-        RestartB.setTitle("", for: UIControlState())
-        RestartB.setTitleColor(UIColor.darkGray, for: UIControlState())
-        RestartB.addTarget(self, action: #selector(EndScene.Move), for: UIControlEvents.touchUpInside)
-        self.view?.addSubview(RestartB)
-        
-        
     }
     
     
-    func Move(){
+    func restartLevel(){
         Utilities.sharedInstance.deleteSubViews(view: self.view!)
         
         if  Physics.modo==1{
@@ -100,28 +89,17 @@ class EndScene: SKScene {
         else {
             self.scene!.view?.presentScene(CrazyScene(fileNamed: "CrazyScene")!, transition: SKTransition.fade(withDuration: 0.1))
         }
-        
-        
-        
     }
 
-    func Menu(){
+    func createMenuButton(){
         menu = SKSpriteNode(imageNamed: "menu")
         menu.position = CGPoint(x: self.frame.width / 2 , y: self.frame.height / 2 - 150)
         menu.size = CGSize(width: 217.7, height: 62.3)
+        menu.name = "menu"
         self.addChild(menu)
-        RestartB2 = UIButton(frame: CGRect(x: self.frame.width / 2, y: self.frame.height / 2 + 150, width: 190, height: 40))
-        RestartB2.center = CGPoint(x: view!.frame.size.width / 2, y: self.frame.height / 2 + 150)
-        RestartB2.setTitle("", for: UIControlState())
-        RestartB2.setTitleColor(UIColor.darkGray, for: UIControlState())
-        RestartB2.addTarget(self, action: #selector(EndScene.MoveM), for: UIControlEvents.touchUpInside)
-        self.view?.addSubview(RestartB2)
-        
-        
     }
     
-    
-    func MoveM(){
+    func backToMainMenu(){
 
         Utilities.sharedInstance.deleteSubViews(view: self.view!)
         
@@ -129,7 +107,19 @@ class EndScene: SKScene {
        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        let touch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.nodes(at: positionInScene)
         
+        if let name = touchedNode.first?.name
+        {
+            if name == "menu"
+            {
+                backToMainMenu()
+            }
+            else if name == "restart"{
+               restartLevel()
+            }
+        }
     }
 }
