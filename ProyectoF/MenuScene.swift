@@ -31,9 +31,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     
     var RestartBtn : UIButton!
     var RestartBtn2: UIButton!
-    var HighscoreLabel = UILabel()
     var Score = UserDefaults.standard
-    var highscore = Int()
+    var highscore = 0
     var mode1: SKSpriteNode!
     var button1: UIButton!
     var mode2: SKSpriteNode!
@@ -45,8 +44,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     var baseC: SKSpriteNode!
     var ball: SKSpriteNode!
     var Score2 = UserDefaults.standard
-    var highscore2 = Int()
-    var HighscoreLabel2 = UILabel()
+    var highscore2 = 0
     var aleatorio: UInt32 = 1;
     var revisar: UInt32 = 1;
     var hexa: SKSpriteNode!
@@ -57,29 +55,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         scene?.backgroundColor = UIColor.white
         Mode1()
         Mode2()
-        
-        if (Score.value(forKey: "Highscore") != nil){
-            highscore = Score.value(forKey: "Highscore") as! NSInteger!
-            HighscoreLabel.text = "Highscore:  \(highscore)"
-            
-        }
-        if (Score2.value(forKey: "Highscore2") != nil){
-            highscore2 = Score2.value(forKey: "Highscore2") as! NSInteger!
-            HighscoreLabel2.text = "Highscore:  \(highscore2)"
-            
-        }
-
-        HighscoreLabel = UILabel(frame: CGRect(x: -self.frame.width / 2, y: self.frame.height / 2 - 100 , width: 125, height: 20))
-        NSLog("y hs label %d", HighscoreLabel.bounds.maxX)
-        HighscoreLabel.textColor = UIColor.black
-        self.view?.addSubview(HighscoreLabel)
-        HighscoreLabel.text = "Highscore:  \(highscore)"
-        
-        HighscoreLabel2 = UILabel(frame: CGRect(x: self.frame.width / 2 , y: self.frame.height / 2 - 200, width: 125, height: 20))
-        HighscoreLabel2.textColor = UIColor.black
-        self.view?.addSubview(HighscoreLabel2)
-        HighscoreLabel2.text = "Highscore:  \(highscore2)"
-        
+        loadHighScores()
+        addHighscoreLabels()
         BaseA()
         BaseR()
         BaseG()
@@ -92,6 +69,30 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
     }
     
+    func loadHighScores(){
+        if (Score.value(forKey: "Highscore") != nil){
+            highscore = Score.value(forKey: "Highscore") as! NSInteger!
+        }
+        if (Score2.value(forKey: "Highscore2") != nil){
+            highscore2 = Score2.value(forKey: "Highscore2") as! NSInteger!
+        }
+    }
+    
+    func addHighscoreLabels(){
+        let highscoreLabelMode1 = SKLabelNode(text: "Highscore: \(highscore)")
+        highscoreLabelMode1.position = CGPoint(x: frame.midX, y: self.frame.height / 2 - 100 + mode1.size.height / 2)
+        highscoreLabelMode1.fontSize = 15
+        highscoreLabelMode1.fontColor = .black
+        highscoreLabelMode1.fontName = "Courier"
+        self.addChild(highscoreLabelMode1)
+        
+        let highscoreLabelMode2 = SKLabelNode(text: "Highscore: \(highscore2)")
+        highscoreLabelMode2.position = CGPoint(x: frame.midX, y: self.frame.height / 2 - 200 + mode1.size.height / 2)
+        highscoreLabelMode2.fontSize = 15
+        highscoreLabelMode2.fontColor = .black
+        highscoreLabelMode2.fontName = "Courier"
+        self.addChild(highscoreLabelMode2)
+    }
     
     func Hexa(){
         hexa = SKSpriteNode(imageNamed: "hexa")
