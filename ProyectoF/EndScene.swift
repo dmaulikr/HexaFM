@@ -26,6 +26,8 @@ class EndScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        self.scene?.size = CGSize(width: 320, height: 568)
+        
         scene?.backgroundColor = UIColor.white
         
         Mode1()

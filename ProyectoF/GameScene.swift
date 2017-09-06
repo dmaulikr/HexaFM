@@ -56,7 +56,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var HighscoreLabel = UILabel(frame: CGRect(x: 120, y: 120, width: 125, height: 20))
     
     override func didMove(to view: SKView) {
-        /* Setup your scene here */
+
+        self.scene?.size = CGSize(width: 320, height: 568)
+        
         let backgroundMusic = SKAudioNode(fileNamed: "music.mp3")
         backgroundMusic.autoplayLooped = true
         addChild(backgroundMusic)

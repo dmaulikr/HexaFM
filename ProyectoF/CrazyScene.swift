@@ -61,6 +61,7 @@ class CrazyScene: SKScene, SKPhysicsContactDelegate {
     var HighscoreLabel = UILabel()
     
     override func didMove(to view: SKView) {
+        self.scene?.size = CGSize(width: 320, height: 568)
         Physics.modo=2
         /* Setup your scene here */
         
